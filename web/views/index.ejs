@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Yellow House</title>
+		<link rel="stylesheet" type="text/css" href="/css/style.css">
+		<link rel="stylesheet" type="text/css" href="/js/dygraph.min.css">
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script src="js/dygraph.min.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			
+			function updateCurrentSolar() {
+				$.ajax({
+					url: '/currentSolar', 
+					success: function(response) {		
+						$('#power-demand').html(response.grid + response.solarplus);
+						$('#solar-production').html(response.solarplus);
+					}
+				});				
+			}
+			
+			function updateWeather() {
+				$.ajax({
+					url: '/weather', 
+					success: function(response) {		
+						$('#weather-temp').html(response.temp);
+					}
+				});
+			}
+			
+			function updateThermostat() {
+				$.ajax({
+					url: '/thermostat', 
+					success: function(response) {		
+						$('#thermostat-temp').html(response.current);
+					}
+				});
+			}
+
+			
+			updateWeather();
+			setInterval(updateWeather, 60 * 1000);
+			updateCurrentSolar();
+			setInterval(updateCurrentSolar, 1000);
+			updateThermostat();
+			setInterval(updateThermostat, 60 * 1000);
+			
+			$(document).ready(function(){
+			  $.ajax({
+				  url: '/solarHistory', 
+				  success: function(response) {		
+
+					  let data = response.header + "\n" + response.points.join("\n") + "\n";
+					g = new Dygraph(
+						$('#chart').get(0),
+						data
+					);
+				  }
+				});
+			});
+		</script>
+		
+		<div class="weather-div">
+			<div class="badges">
+				<div class="badge">
+					<span id="weather-temp" class="badge-value"></span><span class="badge-unit-top">&deg;F</span>
+					<div class="badge-label">Outside</div>
+				</div>
+
+				<div class="badge">
+					<span id="thermostat-temp" class="badge-value"></span><span class="badge-unit-top">&deg;F</span>
+					<div class="badge-label">Inside</div>
+				</div>
+			</div>			
+		</div>
+		
+		<div class="solar-div">
+			<div class="badges">
+				<div class="badge" style="width:180px">
+					<span id="power-demand" class="badge-value"></span><span class="badge-unit">W</span>
+					<div class="badge-label">Demand</div>
+				</div>
+				<div class="badge" style="width:180px">
+					<span id="solar-production" class="badge-value"></span><span class="badge-unit">W</span>
+					<div class="badge-label">Solar</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="solar-chart" >
+			<div class="container" style="width:100%">
+				<div id="chart" height="300px" width="600px"></div>
+			</div>
+		</div>
+	</body>
+</html>
