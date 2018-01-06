@@ -8,15 +8,11 @@ let lg = new LightGuageLib(),
 	weather = new WeatherLib(),
 	logger = new Logger();
 
-let verbose = true;
+let verbose = false;
 
-//const SOLAR_INTERVAL = 1000;
-//const THERMOSTAT_INTERVAL = 5 * 60 * 1000;
-//const WEATHER_INTERVAL = 5 * 60 * 1000;
-
-const SOLAR_INTERVAL = 5 * 1000;
-const THERMOSTAT_INTERVAL = 5 * 1000;
-const WEATHER_INTERVAL = 5 * 1000;
+const SOLAR_INTERVAL = 1000;
+const THERMOSTAT_INTERVAL = 5 * 60 * 1000;
+const WEATHER_INTERVAL = 5 * 60 * 1000;
 
 
 /*
@@ -35,7 +31,7 @@ setInterval(function() {
 			console.log('solarPlus: ' + res.solarPlus);
 		}
 
-		//logger.logSolar(res);
+		logger.logSolar(res);
 	});
 }, SOLAR_INTERVAL);
 
@@ -53,7 +49,7 @@ setInterval(function() {
 			console.log('low target: ' + info.targetLow);
 			console.log('high target: ' + info.targetHigh);
 		}
-		//logger.logThermostat(info);
+		logger.logThermostat(info);
 	});
 	//nest.getEverything((info) => {
 	//    console.log(info);	
@@ -75,6 +71,6 @@ setInterval(function() {
 			console.log('pressure: ' + info.pressure);
 			console.log('humidity: ' + info.humidity);
 		}
-		//logger.logWeather(info);
+		logger.logWeather(info);
 	});
 }, WEATHER_INTERVAL);

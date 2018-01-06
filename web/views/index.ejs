@@ -47,19 +47,19 @@
 			updateThermostat();
 			setInterval(updateThermostat, 60 * 1000);
 			
-			$(document).ready(function(){
-			  $.ajax({
-				  url: '/solarHistory', 
-				  success: function(response) {		
-
-					  let data = response.header + "\n" + response.points.join("\n") + "\n";
-					g = new Dygraph(
-						$('#chart').get(0),
-						data
-					);
-				  }
-				});
-			});
+			//$(document).ready(function(){
+			//  $.ajax({
+			//	  url: '/solarHistory', 
+			//	  success: function(response) {		
+			//
+			//		  let data = response.header + "\n" + response.points.join("\n") + "\n";
+			//		g = new Dygraph(
+			//			$('#chart').get(0),
+			//			data
+			//		);
+			//	  }
+			//	});
+			//});
 		</script>
 		
 		<div class="weather-div">
