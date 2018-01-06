@@ -8,13 +8,32 @@ export class YellowDbLib {
 	}
 	
 	connect() {
+		let requiredEnvVariables = [
+			'YELLOW_HOUSE_DB_NAME',
+			'YELLOW_HOUSE_DB_HOST',
+			'YELLOW_HOUSE_DB_USER',
+			'YELLOW_HOUSE_DB_PASSWORD'
+		];
+		    
+
+		let fail = false;
+		for (let envVar of requiredEnvVariables) {
+			if (typeof process.env[envVar] == 'undefined') {
+				fail = true;
+			}
+		}
+		if (fail) {
+			throw('Must define ' + requiredEnvVariables.join());
+		}
+
+	
 		this._conn = this._mysql.createConnection({
-		    host: "yellowhouse",
-		    user: "yellow",
-		    password: "house",
-		    database: 'yellowhouse'
+		    host: process.env.YELLOW_HOUSE_DB_HOST,
+		    user: process.env.YELLOW_HOUSE_DB_USER,
+		    password: process.env.YELLOW_HOUSE_DB_PASSWORD,
+		    database: process.env.YELLOW_HOUSE_DB_NAME
 		});
-		
+
 		this._conn.connect(function(err) {
 		  if (err) throw err;
 		  console.log("Connected to database");
