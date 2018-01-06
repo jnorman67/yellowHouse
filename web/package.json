@@ -1,7 +1,8 @@
 {
   "name": "yellow-house-web",
   "version": "1.0.0",
-  "description": "",
+  "private": true,
+  "description": "YellowHouse web app",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
