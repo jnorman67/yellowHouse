@@ -55,6 +55,7 @@ app.get('/solarHistory', function(req, res) {
 	});
 });
 
-app.listen(3000, function () {
-	console.log('Example app listening on port 3000!')
+let port = process.env.YELLOW_HOUSE_PORT;
+app.listen(port, function () {
+	console.log('Example app listening on port ' + port);
 });
