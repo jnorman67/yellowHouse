@@ -64,7 +64,6 @@ export class WeatherLib {
 			zip = process.env.OPENWEATHERMAP_ZIP;
 		
 		this._url = `http://api.openweathermap.org/data/2.5/weather?zip=${zip},us&appid=${appid}`
-console.log(this._url);		
 	}
 	
 	private kTof(K) {
