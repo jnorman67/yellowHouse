@@ -55,7 +55,7 @@ app.get('/solarHistory', function(req, res) {
 	});
 });
 
-app.get('thermostatHistory', function(req, res) {
+app.get('/thermostatHistory', function(req, res) {
 	yellowDbLib.getThermostatHistory((points) => {
 		res.send({
 			header: "Date,Current,TargetLow,TargetHigh",

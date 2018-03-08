@@ -142,11 +142,9 @@ export class YellowDbLib {
 					mi = dt.getMinutes(),
 					sc = dt.getSeconds();
 				
-				let dateString = `${yr}-${mo}-${dy} ${hr}:${mi}:${sc}`,
-				    solarPlus = rec.solarplus,
-				    demand = rec.grid + rec.solarplus;
+				let dateString = `${yr}-${mo}-${dy} ${hr}:${mi}:${sc}`;
 					
-				vals.push(`${dateString},${solarPlus},${demand}`);
+				vals.push(`${dateString},${rec.current},${rec.targetLow},${rec.targetHigh}`);
 				
 			}
 			callback(vals); 
