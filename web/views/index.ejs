@@ -54,12 +54,29 @@
 			//
 			//		  let data = response.header + "\n" + response.points.join("\n") + "\n";
 			//		g = new Dygraph(
-			//			$('#chart').get(0),
+			//			$('#solar-chart').get(0),
 			//			data
 			//		);
 			//	  }
 			//	});
 			//});
+			
+			
+			$(document).ready(function(){
+			  $.ajax({
+				  url: '/thermostatHistory', 
+				  success: function(response) {		
+			
+					  let data = response.header + "\n" + response.points.join("\n") + "\n";
+					g = new Dygraph(
+						$('#thermostat-chart').get(0),
+						data
+					);
+				  }
+				});
+			});
+			
+			
 		</script>
 		
 		<div class="weather-div">
@@ -91,7 +108,14 @@
 		
 		<div class="solar-chart" >
 			<div class="container" style="width:100%">
-				<div id="chart" height="300px" width="600px"></div>
+				<div id="solar-chart" height="300px" width="600px"></div>
+			</div>
+		</div>
+		
+		
+		<div class="thermostat-chart">
+			<div class="container" style="width:100%">
+				<div id="thermostat-chart" height="300px" width="600px"></div>
 			</div>
 		</div>
 	</body>

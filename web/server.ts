@@ -55,7 +55,16 @@ app.get('/solarHistory', function(req, res) {
 	});
 });
 
+app.get('thermostatHistory', function(req, res) {
+	yellowDbLib.getThermostatHistory((points) => {
+		res.send({
+			header: "Date,Current,TargetLow,TargetHigh",
+			points: points
+		});
+	});
+});
+
 let port = process.env.YELLOW_HOUSE_WEB_PORT;
 app.listen(port, function () {
-	console.log('Example app listening on port ' + port);
+	console.log('YellowHouse listening on port ' + port);
 });
